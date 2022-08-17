@@ -63,34 +63,37 @@ void mergeSort(vector<T>& list,int inicio, int fin, int &nCompara){//O (n log n)
 }
 
 /*MAIN*/
-int main()
+int main(int argc, char *argv[])
 {
-    ifstream fileIn("numeros.txt");
-    ofstream fileOut("numeros.out");
+    string nomArchivo = argv[1]; //toma parametro main
+    ifstream fileIn(nomArchivo.c_str());
+
+    nomArchivo.resize(nomArchivo.size() - 4); //elimina .txt
+    nomArchivo += ".out";
+    ofstream fileOut(nomArchivo.c_str());
 
     string line;
     vector<int> numero;
 
+    cout<<"MERGE SORT - Jesus Sebastian Jaime Oviedo A01412442 - 19 agosto 2022 - Algoritmos Avanzados"<<endl;
     cout<<"Inicia lectura de txt..."<<endl;
 
     while (getline(fileIn,line)){
         numero.push_back( stoi(line) );
     }
-
-    printf("Hola Mundo\n");
-
     int longitudVector = numero[0];
-    //numero.erase(numero.begin());
-
     int nCompara=0;
-
+    
+    /*
     for(int i=1;i<=longitudVector;i++){
         cout<<numero[i]<<endl;
     }
     cout<<"Fin de la lista"<<endl;
+    */
     
     mergeSort(numero, 1, longitudVector, nCompara);
 
+    cout<<"LISTA ORDENADA! Se hicieron "<<nCompara<<" comparaciones"<<endl;
     for(int i=1;i<=longitudVector;i++){
         cout<<numero[i]<<endl;
         fileOut<<numero[i]<<endl;
