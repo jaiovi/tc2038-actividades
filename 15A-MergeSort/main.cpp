@@ -5,6 +5,8 @@
 #include <vector>
 
 #include <algorithm>
+//Jesus Sebastian Jaime Oviedo A01412442
+//19 de agosto del 2022 - Algoritmos avanzados
 
 using namespace std;
 
@@ -66,30 +68,23 @@ void mergeSort(vector<T>& list,int inicio, int fin, int &nCompara){//O (n log n)
 int main(int argc, char *argv[])
 {
     string nomArchivo = argv[1]; //toma parametro main
-    ifstream fileIn(nomArchivo.c_str());
+    ifstream fileIn(nomArchivo.c_str()); //convierte en const char * y titula el fileIn
 
     nomArchivo.resize(nomArchivo.size() - 4); //elimina .txt
     nomArchivo += ".out";
     ofstream fileOut(nomArchivo.c_str());
 
     string line;
-    vector<int> numero;
+    vector<double> numero; //acepta x cantidad de numeros double
 
     cout<<"MERGE SORT - Jesus Sebastian Jaime Oviedo A01412442 - 19 agosto 2022 - Algoritmos Avanzados"<<endl;
     cout<<"Inicia lectura de txt..."<<endl;
 
     while (getline(fileIn,line)){
-        numero.push_back( stoi(line) );
+        numero.push_back( stod(line) ); //convierte el string linea a double
     }
     int longitudVector = numero[0];
     int nCompara=0;
-    
-    /*
-    for(int i=1;i<=longitudVector;i++){
-        cout<<numero[i]<<endl;
-    }
-    cout<<"Fin de la lista"<<endl;
-    */
     
     mergeSort(numero, 1, longitudVector, nCompara);
 

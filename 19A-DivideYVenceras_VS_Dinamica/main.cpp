@@ -2,6 +2,8 @@
 #include <vector>
 using namespace std;
 
+// EJERCICIO TIPOS DE FIBONACCI
+
 int fibDinamico(int n, vector<int> memo){ //ligerisimo
     int f;
     if(memo[n] == n){
