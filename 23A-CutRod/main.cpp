@@ -3,6 +3,9 @@
 #include <vector>
 using namespace std;
 
+//Jesus Sebastian Jaime Oviedo A01412442
+//2 de septiembre del 2022 - Algoritmos avanzados
+
 template<class T>
 int memoizedCutRod(vector<T>& p, int n, vector<T>& r){ //recuerda q te regres r grandote
     int q;
