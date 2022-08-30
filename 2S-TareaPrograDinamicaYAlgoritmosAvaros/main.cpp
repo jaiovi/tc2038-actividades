@@ -68,6 +68,7 @@ int main(int argc, char *argv[])
     for (int i = 0; i < cantLineas; i++)
     {
         cout<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
+        fileOut<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
     }
     
 
