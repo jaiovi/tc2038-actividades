@@ -3,35 +3,13 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-
 #include <tgmath.h>
-#include <algorithm>
-
 using namespace std;
 
-int minCoins(int N, int M, vector<int> dp, vector<int> monedas) //N es cambio, M es cantMon
-{
-  dp.push_back(0); //cambio de 0 es 0
-  
-  //Iterating in the outer loop for possible values of sum between 1 to N
-  //Since our final solution for sum = N might depend upon any of these values
-  for(int i = 1;i<=N;i++)
-  {
-    //Inner loop denotes the index of coin array.
-    //For each value of sum, to obtain the optimal solution.
-    for(int j = 0;j<M;j++)
-    {
-      //i —> sum
-      //j —> next coin index
-      //If we can include this coin in our solution
-      if(monedas[j] <= i)
-      {
-        //Solution might include the newly included coin
-        dp.push_back ( monedas[j] );
-      }
-    }
-  }
-  return dp[N];
+
+
+void cambioDinamico(int p, int q, int n, vector<int>& monedas){
+
 }
 
 vector<int> cambioAvaro(vector<int> monedas, int cantMon, int cambio){
@@ -84,24 +62,17 @@ int main(int argc, char *argv[])
 
     //
 
-    cout<<"Resultado avaro"<<endl;
     vector<int> resultadoAvaro;
     resultadoAvaro = cambioAvaro(monedas, cantLineas, cambio);
 
-    for (int i = cantLineas-1; i >=0 ; i--)
+    for (int i = 0; i < cantLineas; i++)
     {
         cout<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
         fileOut<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
     }
     
-    vector<int> dp;
-    cout<<"Resultado dinamico"<<endl;
-    cout<<"MinCoins :" << minCoins(cambio, cantLineas, dp, monedas);
-    for (int i = 0; i < dp.size(); i++)
-    {
-        cout<<dp[i]<<endl;
-    }
+
+
     
-        
     return 0;
 }
