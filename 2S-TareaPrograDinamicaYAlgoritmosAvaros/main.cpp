@@ -53,18 +53,12 @@ vector<int> cambioDinamico(vector<int> monedas, int indice, int cantMon, int cam
 
 vector<int> minCoins(vector<int> coins, int m, int V)
 {
-    // table[i] will be storing the minimum number of coins
-    // required for i value.  So table[V] will have result
-    vector<int> table(V, INT_MAX);
- 
-    // Base case (If given value V is 0)
+    vector<int> table(V+1, INT_MAX);
     table[0] = 0;
  
-    // Compute minimum coins required for all
     // values from 1 to V
-    for (int i=0; i<V; i++)
+    for (int i=1; i<=V; i++)
     {
-        // Go through all coins smaller than i
         for (int j=0; j<m; j++)
           if (coins[j] <= i)
           {
@@ -145,7 +139,7 @@ int main(int argc, char *argv[])
     for (int i = cantLineas-1; i >=0 ; i--)
     {
         cout<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
-        cout<<monedas[i]<<" "<<resultadoDinamico[i]<<endl;
+        //cout<<monedas[i]<<" "<<resultadoDinamico[i]<<endl;
         fileOut<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
     }
 
