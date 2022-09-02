@@ -9,6 +9,7 @@
 
 using namespace std;
 
+/*
 int minCoins(int N, int M, vector<int> dp, vector<int> monedas) //N es cambio, M es cantMon
 {
   dp.push_back(0); //cambio de 0 es 0
@@ -32,6 +33,50 @@ int minCoins(int N, int M, vector<int> dp, vector<int> monedas) //N es cambio, M
     }
   }
   return dp[N];
+}
+*/
+
+/*
+vector<int> cambioDinamico(vector<int> monedas, int indice, int cantMon, int cambio){
+  vector<int> cantMonedas( cantMon);
+
+  if(indice==cantMon-1){//va reduciendo el limite
+    cantMonedas[indice] = floor(cambio / monedas[indice]);
+    cambio = cambio - (monedas[indice]*cantMonedas[indice]);
+  }else{
+    cantMonedas = cambioDinamico(monedas, indice+1, cantMon, cambio);
+  }
+  return cantMonedas;
+
+}
+*/
+
+vector<int> minCoins(vector<int> coins, int m, int V)
+{
+    // table[i] will be storing the minimum number of coins
+    // required for i value.  So table[V] will have result
+    vector<int> table(V, INT_MAX);
+ 
+    // Base case (If given value V is 0)
+    table[0] = 0;
+ 
+    // Compute minimum coins required for all
+    // values from 1 to V
+    for (int i=0; i<V; i++)
+    {
+        // Go through all coins smaller than i
+        for (int j=0; j<m; j++)
+          if (coins[j] <= i)
+          {
+              int sub_res = table[i-coins[j]];
+              if (sub_res != INT_MAX && sub_res + 1 < table[i])
+                  table[i] = sub_res + 1;
+          }
+    }
+    if(table[V]==INT_MAX)
+      return vector<int>();
+   
+    return table;
 }
 
 vector<int> cambioAvaro(vector<int> monedas, int cantMon, int cambio){
@@ -88,20 +133,29 @@ int main(int argc, char *argv[])
     vector<int> resultadoAvaro;
     resultadoAvaro = cambioAvaro(monedas, cantLineas, cambio);
 
-    for (int i = cantLineas-1; i >=0 ; i--)
-    {
-        cout<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
-        fileOut<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
-    }
+    
     
     vector<int> dp;
     cout<<"Resultado dinamico"<<endl;
+    vector<int> resultadoDinamico;
+    //resultadoDinamico = cambioDinamico (monedas, 0, cantLineas, cambio);
+    resultadoDinamico=minCoins(monedas, cantLineas, cambio);
+    //cout << "Minimum coins required is "<< minCoins(coins, m, V);
+
+    for (int i = cantLineas-1; i >=0 ; i--)
+    {
+        cout<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
+        cout<<monedas[i]<<" "<<resultadoDinamico[i]<<endl;
+        fileOut<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
+    }
+
+    /*
     cout<<"MinCoins :" << minCoins(cambio, cantLineas, dp, monedas);
     for (int i = 0; i < dp.size(); i++)
     {
         cout<<dp[i]<<endl;
     }
-    
+    */
         
     return 0;
 }
