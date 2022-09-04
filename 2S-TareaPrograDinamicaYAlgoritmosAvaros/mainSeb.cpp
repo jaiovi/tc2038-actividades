@@ -98,17 +98,8 @@ int main(int argc, char *argv[])
     for (int i = cantLineas-1; i >=0 ; i--)
     {
         cout<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
-        //cout<<monedas[i]<<" "<<resultadoDinamico[i]<<endl;
         fileOut<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
     }
-
-    /*
-    cout<<"MinCoins :" << minCoins(cambio, cantLineas, dp, monedas);
-    for (int i = 0; i < dp.size(); i++)
-    {
-        cout<<dp[i]<<endl;
-    }
-    */
         
     return 0;
 }
