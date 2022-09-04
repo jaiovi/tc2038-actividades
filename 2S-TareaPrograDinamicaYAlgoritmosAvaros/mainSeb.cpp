@@ -16,7 +16,7 @@ using namespace std;
 
 vector<int> minCoins(vector<int> coins, int m, int V) //CAMBIO DINAMICO - Analisis de complejidad O(n*m)
 {
-    vector<int> table(V+1, INT_MAX);
+    vector<int> table(V+1, INT_MAX); //INT_MAX funciona en macOS y linux
     table[0] = 0;
  
     // values from 1 to V
@@ -86,23 +86,19 @@ int main(int argc, char *argv[])
 
     //
 
-    cout<<"Resultado avaro"<<endl;
+    //cout<<"Resultado avaro"<<endl;
     vector<int> resultadoAvaro;
-    resultadoAvaro = cambioAvaro(monedas, cantLineas, cambio);
-
-    
+    resultadoAvaro = cambioAvaro(monedas, cantLineas, cambio); 
     
     vector<int> dp;
-    cout<<"Resultado dinamico"<<endl;
+    //cout<<"Resultado dinamico"<<endl;
     vector<int> resultadoDinamico;
-    //resultadoDinamico = cambioDinamico (monedas, 0, cantLineas, cambio);
     resultadoDinamico=minCoins(monedas, cantLineas, cambio);
-    //cout << "Minimum coins required is "<< minCoins(coins, m, V);
 
     for (int i = cantLineas-1; i >=0 ; i--)
     {
         cout<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
-        //cout<<monedas[i]<<" "<<resultadoDinamico[i]<<endl;
+        cout<<monedas[i]<<" "<<resultadoDinamico[i]<<endl;
         fileOut<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
     }
 
