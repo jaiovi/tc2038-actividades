@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
     for (int i = cantLineas-1; i >=0 ; i--)
     {
         cout<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
-        cout<<monedas[i]<<" "<<resultadoDinamico[i]<<endl;
+        //cout<<monedas[i]<<" "<<resultadoDinamico[i]<<endl;
         fileOut<<monedas[i]<<" "<<resultadoAvaro[i]<<endl;
     }
 
