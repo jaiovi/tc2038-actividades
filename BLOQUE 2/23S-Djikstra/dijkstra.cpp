@@ -15,9 +15,9 @@ int minDistance(int dist[], int n)
 
 {
   int min = INT_MAX, min_index;
-  for (int v = 0; v < n; v++ ){
-    
-  }
+  for (int v = 0; v < n; v++ )
+    if (n == false && dist[v] <= min)
+            min = dist[v], min_index = v;
 
   return 0;
 }
