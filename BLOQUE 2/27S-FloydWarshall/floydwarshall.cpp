@@ -10,31 +10,27 @@
   
 using namespace std;
 
-int** floydWarshall (int** W, int){
+int** floydWarshall (int** W, int n){
     //int** dp = W; //crear matriz de distancias
     int dp[n][n]=W;
+    int pi[n][n];
 
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            if( i == j || W[i,j] = INT_MAX)
+            if( i == j || W[i][j] = INT_MAX)
             {
-                p[i,j] = NULL;
+                pi[i][j] = NULL;
             }
-            else if (i => j && W[i,j] < INT_MAX){
-                    p[i,j] = i;
+            else if (i => j && W[i][j] < INT_MAX){
+                    pi[i][j] = i;
             } 
         }
         
     }
     
-    /*
-    if i = j || W[i,j] = INT_MAX{
-        p[i,j] = NULL|
-        else if i =/ j 
-    }
-    */
+
     
     for (int k = 0; k < n; k++)
     {
@@ -42,17 +38,17 @@ int** floydWarshall (int** W, int){
         {
             for (int j = 0; j < n; j++)
             {
-                if(dp[i,j] > dp[i,k] + dp[k,j] && (dp[k][j] != INF && dp[i][k] != INF) )
+                if(dp[i][j] > dp[i][k] + dp[k][j] && (dp[k][j] != INT_MAX && dp[i][k] != INT_MAX) )
                 {
-                    dp[i,j] = dp[i,k] + dp[k,j];
-                    pi[i,j] = pi[k,j];
+                    dp[i][j] = dp[i][k] + dp[k][j];
+                    pi[i][j] = pi[k][j];
                 }
             }
             
         }
         
     }
-    ImprimirCamino(pi, i, f)
+    ImprimirCamino(pi, 1, f);
     return dp;
 }
 
@@ -60,15 +56,16 @@ void ImprimirCamino(int **pi, int i, int f){
     stack<int> my_stack;
     my_stack.push(f);
     while (true){
-        f = pi[i,f];
+        f = pi[i][f]; //subarray minus last item
         my_stack.push(f);
         if(f == 1){
             break;
         }
     }
 
-    while (my_stack){
-        cout<<my_stack.pop()<<endl;
+    while (!my_stack.empty()){
+        int regalo = my_stack.pop();
+        cout << regalo << " -> "<<endl;
     };
 
 }
@@ -116,6 +113,6 @@ int main(int argc, char *argv[]) { //COMPLEJIDAD GENERAL O(n^3)
         }
     }
 
-    pi = floydWarshall(arr, n);
+    floydWarshall(arr, n);
 
 }
