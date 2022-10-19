@@ -1,3 +1,5 @@
+//DESCARTADOS
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -19,53 +21,30 @@ bool sortbysec(const pair<int,int> &a, const pair<int,int> &b)
 vector<int>
 WelshPowell(vector< pair<int, int> > &grados, int** graph){
   int n=grados.size();
-  /*
-  vector< pair<int, int> > coloreado;
-  //primer nodo es color 0
-  pair<int, int> Pfirst (0, 0);
-  coloreado.push_back(Pfirst);
-  //y el resto
-  for (int i = 1; i < n; i++)
-  {
-    pair<int, int> P (i, 99);
-    coloreado.push_back(P);
-  }
-  */
- vector<int> coloreado (n,99);
- coloreado[0]=0;
-  /*
-  int i=1;
+
+  //CREA EL VECTOR
+  vector<int> coloreado (n,99);
+  coloreado[0]=0; //El primer elemento en el grafo tendra color 0
   
-  for (int color = 0; color < n; color++)
-  {
-    for (int j = 0; j < n; j++) {
-      int ii = grados[i].first;//indice
-      cout<<graph[ii][j]<<" ";
-      if( graph[ii][j]==0 && coloreado[j].second!=99){ //&& coloreado[j].second!=coloreado[ii].second
-        coloreado[j].second=color;
-      }
-      i++;
-    }
-    cout<<endl;
-  }
-  */
- int color=0;
-  //for (int color = 0; color < 5; color++){
-    for (int repet = 1; repet < n; repet++)
-    {//repetir las filas del grafo
+  int color=0;
+  for (int repet = 1; repet < n; repet++)
+  {//repetir las filas del grafo
     for (int ii = 0; ii < n; ii++)
     {
       int i = grados[ii].first;//indice
-      cout<<i<<" | "<<repet<<" "<<i<<" : "<<graph[repet][i]<<endl;
-      if(graph[repet][i]==0 && coloreado[i]==99){
-        coloreado[i]=color;
-      }
-      
-    }
-    color++;
-    }
+      //cout<<i<<" | "<<repet<<" "<<i<<" : "<<graph[repet][i]<<endl;
 
- //}
+      if(graph[repet][i]==1 && repet==i){
+        cout<<"No es posible asignar colores a los nodos"<<endl;//Un nodo que se conecta si mismo, genera error al colorear
+        return coloreado;
+      }
+      if(graph[repet][i]==0 && coloreado[i]==99){ 
+        coloreado[i]=color; //al encontrar elementos no adyacente y aun si colorear, lo colorea
+      } 
+    }
+  color++;
+  }
+
  
  
   return coloreado;
@@ -139,10 +118,9 @@ int main(int argc, char *argv[]) { //COMPLEJIDAD GENERAL O(n^2)
   //vector< pair<int,int> > coloreado = WelshPowell(grados, arr);
   vector<int> coloreado= WelshPowell(grados, arr);
   cout << "\nGraph Coloring por Algoritmo Welsh-Poweell - 27 de septiembre 2022" << endl;
-  //for (int j = 0; j < n; j++) { cout<<coloreado[j].first<<" tiene color "<<coloreado[j].second<<endl;}
   for (int i = 0; i < n; i++)
   {
-    cout<<i<<"tiene color"<<coloreado[i]<<endl;
+    cout<<"Node: "<<i<<", Assigned color"<<coloreado[i]<<endl;
   }
   
 
