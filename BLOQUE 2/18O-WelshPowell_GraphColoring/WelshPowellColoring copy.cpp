@@ -27,42 +27,35 @@ WelshPowell(vector< pair<int, int> > &grados, int** graph){
   coloreado[0]=0; //El primer elemento en el grafo tendra color 0
   
   int color=0;
-  //vector< pair<int, int> > grados2;
   for (int repet = 1; repet < n; repet++)
   {//repetir las filas del grafo
-    
+    vector< pair<int, int> > grados2;
     //vector<int> adyacentesGuardados (n,-1);
     for (int ii = 0; ii < grados.size(); ii++)
     {
       int i = grados[ii].first;//indice
-      //cout<<repet<<" " <<i<<" : "<<coloreado[i]<<endl;
       //cout<<i<<" | "<<repet<<" "<<i<<" : "<<graph[repet][i]<<endl;
 
       if(graph[repet][i]==1 && repet==i){
         cout<<"No es posible asignar colores a los nodos"<<endl;//Un nodo que se conecta si mismo, genera error al colorear
         return coloreado;
       }
-      bool valida=false;
-      if(graph[repet][i]==0 && coloreado[i]==-1){ //repet
-        valida=true;
-        for (int jj = 0; jj < grados.size() && valida; jj++){
-          int j = grados[jj].first;//indice
-
-          if (graph[i][j]==1 && coloreado[j]==color)//checa verticalmente en la matriz si hay del mimsmo color molestando graph[j][i]==0 &&
-          {
-            valida=false;
-            break;
-          }
+      bool validado=true;
+      for (int j = 0; j < count; j++)
+      {
+        if(graph[repet][i]==0 && coloreado[i]==-1){ 
+        coloreado[i]=color; //al encontrar elementos no adyacente y aun si colorear, lo colorea
+        validado=true;
+        //adyacentesGuardados[i]=j;  && adyacentesGuardados[i]==-1)
+        //graph[i][i]=1; //imposibilita colindarle
         }
-      //if(!valida){//el elemento no cambio color en la ronda
-      //  grados2.push_back(grados[ii]); //los no coloreado se llevan a guardar a la sig ronda
-      if(valida){
-        coloreado[i]=color;
       }
-      } 
       
+      if(valdiado==true){
+        grados2.push_back(grados[ii]);
+      } 
     }
-    //grados = grados2;
+    grados = grados2;
     color++;
   }
 
@@ -72,28 +65,7 @@ WelshPowell(vector< pair<int, int> > &grados, int** graph){
   
 }
 
-bool verificar(int** graph, int n, vector<int> coloreado){
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < n; j++)
-    {
-      if(graph[i][j]!=graph[j][i]){
-        return false; //no son bidireccionales
-      }
-    }
-    
-  }
-  for (int i = 0; i < n; i++)
-  {
-    if(coloreado[i]==-1){
-      return false; //son espejeados y triangulares, imposible
-    }
-  }
-  
-  return true;
-}
-
-int main(int argc, char *argv[]) { //COMPLEJIDAD GENERAL O(n^3)
+int main(int argc, char *argv[]) { //COMPLEJIDAD GENERAL O(n^2)
 
   // LECTOR DE TXT
   string file = argv[1];
@@ -145,25 +117,26 @@ int main(int argc, char *argv[]) { //COMPLEJIDAD GENERAL O(n^3)
       }
     }
   
-  sort(grados.begin(), grados.end(), sortbysec);
+  //std::vector<int> y(x.size());
   /*
-  //VERIFICAR LECTOR
+  std::iota(indices.begin(), indices.end(), 0);
+  auto comparator = [&grados](int a, int b){ return grados[a] < grados[b]; };
+  std::sort(indices.begin(), indices.end(), comparator);
+  */
+  sort(grados.begin(), grados.end(), sortbysec);
+
   for (int j = 0; j < n; j++) { 
-    cout<<grados[j].first<<" tiene peso "<<grados[j].second<<endl;
+    //cout<<grados[j].first<<" tiene peso "<<grados[j].second<<endl;
   }
   cout<<endl;
-  */
 
-  
-    vector<int> coloreado= WelshPowell(grados, arr);
-    if(verificar(arr, n, coloreado)){
-    cout << "\nGraph Coloring por Algoritmo Welsh-Poweell - 27 de septiembre 2022" << endl;
-    for (int i = 0; i < n; i++)
-    {
-      cout<<"Node: "<<i<<", Assigned color "<<coloreado[i]<<endl;
-    }
-  }else{
-    cout<<"No es posible asignar colores a los nodos"<<endl;
+
+  //vector< pair<int,int> > coloreado = WelshPowell(grados, arr);
+  vector<int> coloreado= WelshPowell(grados, arr);
+  cout << "\nGraph Coloring por Algoritmo Welsh-Poweell - 27 de septiembre 2022" << endl;
+  for (int i = 0; i < n; i++)
+  {
+    cout<<"Node: "<<i<<", Assigned color "<<coloreado[i]<<endl;
   }
   
 

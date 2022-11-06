@@ -19,11 +19,11 @@ int** floydWarshall (int** W, int n){
     {
         for (int j = 0; j < n; j++)
         {
-            if( i == j || W[i][j] = INT_MAX)
+            if( i == j || W[i][j] == INT_MAX)
             {
                 pi[i][j] = NULL;
             }
-            else if (i => j && W[i][j] < INT_MAX){
+            else if (i >= j && W[i][j] < INT_MAX){
                     pi[i][j] = i;
             } 
         }
